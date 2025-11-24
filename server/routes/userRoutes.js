@@ -10,4 +10,6 @@ router.post('/login', authControllers.loginUser);
 
 router.post("/logout", middleware.authMiddleware,authControllers.logoutUser);
 
+router.get("/check-auth",middleware.authMiddleware,authControllers.checkAuthStatus);
+
 module.exports = router;

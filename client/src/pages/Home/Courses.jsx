@@ -56,9 +56,9 @@ const Courses = () => {
         {
           coursesList.map((course, index) => {
             return(
-              <>
+            
                 <CourseCard key={index} course={course} />
-              </>
+              
             )
           })
         }

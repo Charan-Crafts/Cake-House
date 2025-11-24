@@ -1,6 +1,29 @@
 import React from 'react';
+import {toast} from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import {userLogout} from '../../redux/slices/authSlice';
 
 const AdminNavbar = () => {
+
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        
+        const logout = async () => {
+            
+            const response = await dispatch(userLogout());
+
+            if(response.payload.success){
+                toast.success("Logout successful!");
+                return;
+            }else{
+                toast.error(response.payload.message);
+            }
+        }
+
+        logout();
+        
+    }
     return (
         <div className="navbar bg-white shadow-md px-4 md:px-8">
             {/* Left: Logo / Brand */}
@@ -57,7 +80,7 @@ const AdminNavbar = () => {
                     >
 
                         <li>
-                            <a className="hover:bg-red-100 text-red-600 rounded-md">Logout</a>
+                            <button className="hover:bg-red-100 text-red-600 text-center rounded-md" onClick={handleLogout}>Logout</button>
                         </li>
                     </ul>
                 </div>

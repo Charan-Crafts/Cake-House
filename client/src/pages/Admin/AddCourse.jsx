@@ -8,7 +8,7 @@ const AddCourse = () => {
           Add New Course
         </h1>
 
-            <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4">
 
           {/* Course Image */}
           <div className="flex flex-col">

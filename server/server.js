@@ -32,6 +32,10 @@ app.use("/api/v1/course", courseRoutes);
 
 app.use("/api/v1/auth", userRoutes);
 
+app.use("/",(req,res)=>{
+    return res.status(200).json({message:"API is running"})
+})
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
 });

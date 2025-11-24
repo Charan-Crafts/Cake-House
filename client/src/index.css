@@ -21,7 +21,7 @@
   /* orange buttons (background) */
 
   /* keep existing text colors unchanged */
-    --color-heading: #5B544D;
+  --color-heading: #5B544D;
 }
 
 /* Hide scrollbar ONLY for the main webpage */
@@ -59,11 +59,13 @@ select,
 .select.select-bordered,
 .file-input,
 .file-input.file-input-bordered {
-  border-color: rgba(91,84,77,0.22) !important; /* slightly darker than background */
+  border-color: rgba(91, 84, 77, 0.22) !important;
+  /* slightly darker than background */
   color: var(--color-heading) !important;
 }
 
 /* placeholder readability */
-input::placeholder, textarea::placeholder {
-  color: rgba(91,84,77,0.45);
+input::placeholder,
+textarea::placeholder {
+  color: rgba(91, 84, 77, 0.45);
 }

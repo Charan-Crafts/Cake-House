@@ -1,17 +1,36 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { userLogout } from "../../redux/slices/authSlice";
+import { toast } from "react-toastify";
 const UserNavbar = () => {
 
   const navigate = useNavigate();
 
-  const hanldeCartClick=()=>{
+  const dispatch = useDispatch();
+
+  const hanldeCartClick = () => {
     navigate('/cake-house/cart');
-    
+
+  }
+
+  const handleLogout = () => {
+    const logout = async () => {
+      const response = await dispatch(userLogout());
+      console.log("Logout response:", response);
+      if (response.payload.success) {
+        
+        toast.success("Logout successful!");
+        return;
+      } else {
+        toast.error(response.payload.message);
+      }
+    }
+    logout();
   }
   return (
     <div className="navbar bg-white shadow-sm px-6 py-2 flex items-center justify-between">
-      
+
       {/* Brand */}
       <div className="flex-1">
         <Link className="text-2xl font-bold text-orange-500  hover:text-orange-400 transition-all" to="/cake-house">
@@ -48,9 +67,9 @@ const UserNavbar = () => {
 
       {/* Right Icons */}
       <div className="flex-none flex items-center gap-4 ml-4">
-        
+
         {/* Cart */}
-        <div className="dropdown dropdown-end" onClick = {hanldeCartClick}>
+        <div className="dropdown dropdown-end" onClick={hanldeCartClick}>
           <div
             tabIndex={0}
             role="button"
@@ -81,7 +100,7 @@ const UserNavbar = () => {
             tabIndex={0}
             className="dropdown-content card card-compact bg-base-100 z-10 mt-3 w-56 shadow-lg"
           >
-            
+
           </div>
         </div>
 
@@ -98,7 +117,7 @@ const UserNavbar = () => {
 
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow-lg z-10"
+            className="menu menu-sm dropdown-content bg-white rounded-box mt-3 w-52 p-2 shadow-lg z-10"
           >
             {/* <li>
               <a className="justify-between">
@@ -106,8 +125,10 @@ const UserNavbar = () => {
                 <span className="badge badge-primary text-white">New</span>
               </a>
             </li> */}
-            
-            <li><a>Logout</a></li>
+
+            <li>
+              <button onClick={handleLogout} className="bg-orange-500 rounded-2xl text-white">Logout</button>
+            </li>
           </ul>
         </div>
 

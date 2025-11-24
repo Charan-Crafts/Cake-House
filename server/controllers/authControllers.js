@@ -39,14 +39,14 @@ const generateAccessTokenAndRefreshToken = async (user) => {
 
 const userRegistration = async (req, res) => {
 
-    const { userName, email, password, phoneNumber,role } = req.body;
+    const { userName, email, password, phoneNumber, role } = req.body;
 
     try {
 
         const checkUser = await userModel.findOne({ email: email });
 
-        let assignRole = role==="admin"?"admin":"user";
-       
+        let assignRole = role === "admin" ? "admin" : "user";
+
 
         if (checkUser) {
             return res.status(200).json({
@@ -57,13 +57,13 @@ const userRegistration = async (req, res) => {
 
         const hashedPassword = await hashPassword(password);
 
-     
+
         const newUser = await userModel.create({
             userName,
             email,
             password: hashedPassword,
             phoneNumber,
-            role:assignRole
+            role: assignRole
         });
 
         const { accessToken, refreshToken } = await generateAccessTokenAndRefreshToken(newUser);
@@ -75,20 +75,20 @@ const userRegistration = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-        
+
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-    
-            maxAge:  60 * 60 * 1000 // 1 hour
+
+            maxAge: 60 * 60 * 1000 // 1 hour
         });
 
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
-            user:response
+            user: response
         });
 
     } catch (error) {
@@ -103,7 +103,7 @@ const userRegistration = async (req, res) => {
 
 const loginUser = async (req, res) => {
 
-    const {email,password} = req.body;
+    const { email, password } = req.body;
 
     try {
 
@@ -137,22 +137,22 @@ const loginUser = async (req, res) => {
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-        
+
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         });
 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-    
-            maxAge:  60 * 60 * 1000 // 1 hour
+
+            maxAge: 60 * 60 * 1000 // 1 hour
         });
 
         return res.status(200).json({
             success: true,
             message: "Login successful",
-            user:response
+            user: response
         });
-        
+
     } catch (error) {
         console.log("error in user login", error);
         return res.status(500).json({
@@ -164,13 +164,13 @@ const loginUser = async (req, res) => {
 }
 
 
-const logoutUser =async (req,res) => {
-    
+const logoutUser = async (req, res) => {
+
     try {
 
         const userId = req.user.userId;
 
-        const checkUser = await userModel.findById(userId); 
+        const checkUser = await userModel.findById(userId);
 
         checkUser.refreshToken = "";
         await checkUser.save();
@@ -179,22 +179,39 @@ const logoutUser =async (req,res) => {
         res.clearCookie("refreshToken");
 
         return res.status(200).json({
-            success:true,
-            message:"Logout successful"
+            success: true,
+            message: "Logout successful"
         });
-        
+
     } catch (error) {
-        console.log("error while logout",error);
+        console.log("error while logout", error);
         return res.status(500).json({
-            success:false,
-            message:error.message
-        }); 
+            success: false,
+            message: error.message
+        });
     }
 }
 
+const checkAuthStatus = async (req, res) => {
 
+    const user = req.user;
+
+    if (user) {
+        return res.status(200).json({
+            success: true,
+            message: "Authenticated",
+            user: user
+        })
+    } else{
+        return res.status(401).json({
+            success: false,
+            message: "Not authenticated",
+        })
+    }
+}
 module.exports = {
     userRegistration,
     loginUser,
-    logoutUser
+    logoutUser,
+    checkAuthStatus
 }

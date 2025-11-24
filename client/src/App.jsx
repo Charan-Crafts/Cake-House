@@ -17,12 +17,34 @@ import AddCourse from './pages/Admin/AddCourse';
 import UploadVideos from './pages/Admin/UploadVideos';
 import AdminViewCourse from './pages/Admin/AdminViewCourse';
 import EditComponent from './components/AdminComponents/EditComponent';
+import {useDispatch,useSelector} from 'react-redux';
+import { useEffect } from 'react';
+import {checkAuthStatus} from "./redux/slices/authSlice";
+import {ToastContainer} from 'react-toastify';
 const App = () => {
 
-  const isAuthenticated = true; // for testing purpose
-  const user = {
-    role: "admin"
-  }
+  const dispatch = useDispatch();
+
+  const {isAuthenticated,user} = useSelector((state)=>state.auth);
+
+  useEffect(()=>{
+
+    const response = async()=>{
+
+      const response = await dispatch(checkAuthStatus());
+
+      console.log("Auth check response:",response);
+      if(!response.payload.success){
+        toast.error(response.payload.message);
+        return;
+      }
+    }
+
+    response();
+      
+  },[isAuthenticated,dispatch]);
+
+  
 
 
   // text-button
@@ -30,7 +52,9 @@ const App = () => {
   return (
     <>
       <div className='p-3 bg-background min-h-screen'>
+        <ToastContainer />
         <Routes>
+          
 
           <Route path="/" element={
 
