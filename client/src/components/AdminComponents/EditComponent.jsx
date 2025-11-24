@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Edit2, Trash2, Save, X } from 'lucide-react';
@@ -21,6 +21,7 @@ const EditComponent = () => {
     // preview state for thumbnail image (either URL typed or selected file)
     const [previewUrl, setPreviewUrl] = useState(courseDetails.thumbNail || '');
     const [previewFile, setPreviewFile] = useState(null);
+    const fileInputRef = useRef(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -128,10 +129,16 @@ const EditComponent = () => {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium text-heading mb-1">Thumbnail URL</label>
-                    <input name="thumbNail" value={form.thumbNail} onChange={handleChange} className="w-full px-3 py-2 rounded-md border" style={{ color: 'var(--color-heading)' }} />
+                    <label className="block text-sm font-medium text-heading mb-1">Thumbnail (file)</label>
+                    {/* Visible file input - user asked for file type not URL */}
+                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} className="block text-sm text-heading w-full" />
 
-                    {/* Image preview + file input for separate update */}
+                    {/* show current thumbnail url for reference (readonly) */}
+                    {form.thumbNail ? (
+                        <div className="mt-2 text-xs text-gray-600 break-all">Current: <span className="text-sm text-heading">{form.thumbNail}</span></div>
+                    ) : null}
+
+                    {/* Image preview + controls */}
                     <div className="mt-3 md:flex md:items-start md:gap-4">
                         <div className="w-full md:w-48 h-32 bg-white rounded-md overflow-hidden border" style={{ borderColor: 'rgba(0,0,0,0.06)' }}>
                             {previewUrl ? (
@@ -143,14 +150,13 @@ const EditComponent = () => {
                         </div>
 
                         <div className="flex-1 mt-2 md:mt-0">
-                            <input type="file" accept="image/*" onChange={handleFileChange} className="block text-sm text-heading" />
                             <div className="mt-2 flex gap-2">
-                                <button type="button" onClick={applyPreviewAsThumbnail} className="inline-flex items-center gap-2 px-3 py-2 rounded-md" style={{ background: 'var(--color-button)', color: '#fff' }}>
+                                <button type="button" onClick={() => fileInputRef.current?.click()} className="inline-flex items-center gap-2 px-3 py-2 rounded-md" style={{ background: 'var(--color-button)', color: '#fff' }}>
                                     <Save size={14} /> Update Image
                                 </button>
-                               
+                                
                             </div>
-                            <p className="text-xs text-gray-500 mt-2">You can paste an image URL above or choose a file. Click "Use Preview" to apply it to the thumbnail field.</p>
+
                         </div>
                     </div>
                 </div>
