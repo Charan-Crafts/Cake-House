@@ -10,15 +10,18 @@
 
 
 @theme {
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Quicksand', sans-serif;
-    /* Backgrounds: white + soft orange theme */
-    --color-background: #ffffff; /* page background: white */
-    --color-navbar: #fff7ed; /* navbar / panel backgrounds: very light orange */
-    --color-button: #fb923c; /* orange buttons (background) */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  /* Backgrounds: white + soft orange theme */
+  --color-background: #ffffff;
+  /* page background: white */
+  --color-navbar: #fff7ed;
+  /* navbar / panel backgrounds: very light orange */
+  --color-button: #fb923c;
+  /* orange buttons (background) */
 
-    /* keep existing text colors unchanged */
-    --color-heading: #5B544D;
+  /* keep existing text colors unchanged */
+  --color-heading: #5B544D;
 }
 
 /* Hide scrollbar ONLY for the main webpage */
@@ -30,11 +33,13 @@ body::-webkit-scrollbar {
 }
 
 /* Firefox */
-html, body {
+html,
+body {
   scrollbar-width: none !important;
 }
 
 /* IE/old Edge */
-html, body {
+html,
+body {
   -ms-overflow-style: none !important;
 }
