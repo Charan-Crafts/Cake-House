@@ -21,7 +21,7 @@
   /* orange buttons (background) */
 
   /* keep existing text colors unchanged */
-  --color-heading: #5B544D;
+    --color-heading: #5B544D;
 }
 
 /* Hide scrollbar ONLY for the main webpage */
@@ -42,4 +42,28 @@ body {
 html,
 body {
   -ms-overflow-style: none !important;
+}
+
+/* Make form control borders more visible and use theme heading color */
+input[type="text"],
+input[type="number"],
+input[type="file"],
+input:not([type="submit"]),
+textarea,
+select,
+.input,
+.input.input-bordered,
+.textarea,
+.textarea.textarea-bordered,
+.select,
+.select.select-bordered,
+.file-input,
+.file-input.file-input-bordered {
+  border-color: rgba(91,84,77,0.22) !important; /* slightly darker than background */
+  color: var(--color-heading) !important;
+}
+
+/* placeholder readability */
+input::placeholder, textarea::placeholder {
+  color: rgba(91,84,77,0.45);
 }

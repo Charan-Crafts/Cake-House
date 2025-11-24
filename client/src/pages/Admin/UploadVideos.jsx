@@ -13,7 +13,7 @@ const UploadVideos = () => {
                     {/* Select Course */}
                     <div className="flex flex-col">
                         <label className="font-semibold text-gray-700 mb-1">Select Course</label>
-                        <select className="select select-bordered w-full">
+                        <select className="select select-bordered w-full bg-white text-heading">
                             <option disabled>Select the Course</option>
                             <option>Course 1</option>
                             <option>Course 2</option>
@@ -24,25 +24,25 @@ const UploadVideos = () => {
                     {/* Video Upload */}
                     <div className="flex flex-col">
                         <label className="font-semibold text-gray-700 mb-1">Upload Video</label>
-                        <input type="file" className="file-input file-input-bordered w-full" />
+                        <input type="file" className="file-input file-input-bordered w-full bg-white text-heading" />
                     </div>
 
                     {/* Thumbnail Upload */}
                     <div className="flex flex-col">
                         <label className="font-semibold text-gray-700 mb-1">Upload Thumbnail</label>
-                        <input type="file" className="file-input file-input-bordered w-full" />
+                        <input type="file" className="file-input file-input-bordered w-full bg-white text-heading" />
                     </div>
 
                     {/* Video Title */}
                     <div className="flex flex-col">
                         <label className="font-semibold text-gray-700 mb-1">Video Title</label>
-                        <input type="text" placeholder="Type here" className="input input-bordered w-full" />
+                        <input type="text" placeholder="Type here" className="input input-bordered w-full bg-white text-heading" />
                     </div>
 
                     {/* Video Description */}
                     <div className="flex flex-col">
                         <label className="font-semibold text-gray-700 mb-1">Video Description</label>
-                        <textarea placeholder="Bio" className="textarea textarea-bordered w-full h-24 resize-none"></textarea>
+                        <textarea placeholder="Bio" className="textarea textarea-bordered w-full h-24 resize-none bg-white text-heading"></textarea>
                     </div>
 
                     {/* Submit Button */}
