@@ -16,6 +16,7 @@ import CourseDetails from './pages/Users/CourseDetails';
 import AddCourse from './pages/Admin/AddCourse';
 import UploadVideos from './pages/Admin/UploadVideos';
 import AdminViewCourse from './pages/Admin/AdminViewCourse';
+import EditComponent from './components/AdminComponents/EditComponent';
 const App = () => {
 
   const isAuthenticated = true; // for testing purpose
@@ -66,7 +67,7 @@ const App = () => {
             <Route path="" element={<AdminViewCourse/>}/>
             <Route path="addcourse" element={<AddCourse/>}/>
             <Route path="uploadvideos" element={<UploadVideos/>}/>
-
+            <Route path="editcourse/:id" element={<EditComponent/>}/>
           </Route>
 
           <Route path="*" element={<PageNotFound />} />

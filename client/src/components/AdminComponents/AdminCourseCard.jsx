@@ -1,8 +1,14 @@
 import React from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const CourseCard = ({ course }) => {
+    const navigate = useNavigate();
+
+    const handleEidt = (id) =>{
+        console.log("Edit course with id:", id);
+        navigate(`/admin/editcourse/${id}`,{state:course});
+    }
     return (
-        <div className="w-80c h-[500px] hover-3d mt-8">
+        <div className="w-80c h-[500px] hover-3d mt-8" onClick={() => { }}>
             <div className="card bg-white shadow-md rounded-xl w-full h-full flex flex-col">
 
                 {/* Image */}
@@ -29,8 +35,8 @@ const CourseCard = ({ course }) => {
 
                     {/* Buttons */}
                     <div className="flex items-center justify-between w-full mt-auto">
-                        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 active:bg-yellow-50 active:text-orange-500 transition-all duration-200">
-                            Edit
+                        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 active:bg-yellow-50 active:text-orange-500 transition-all duration-200" onClick={()=>handleEidt(course._id)}>
+                            View
                         </button>
                         <button className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 active:bg-yellow-50 active:text-red-500 transition-all duration-200">
                             Delete
